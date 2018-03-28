@@ -1,0 +1,23 @@
+You are required to write a program which processes country data records by a number of different properties.
+
+A country data file contains a header line, followed by zero or more data lines, in comma-separated value format.
+The data lines are not guaranteed to be in any particular order.
+
+An example file is:
+
+    country_id,name,population,continent
+    1,Mongolia,8315282,ASIA
+    2,Estonia,17382216,EUROPE
+    3,Equatorial Guinea,5949415,AFRICA
+
+The features which you must implement have been prototyped in the class com.sedex.test.CountryProcessor.
+    - They are:
+        - groupCountriesByContinent
+        - groupFilteredCountriesByContinent
+        - populationByContinent
+        - getMostPopulatedCountryByContinent
+
+We would like to see all the test cases passing.
+
+The time allotted to the test is 1 hour. Your solution will be judged on a number of criteria pertinent to good
+software development practice. Incomplete solutions are acceptable.
