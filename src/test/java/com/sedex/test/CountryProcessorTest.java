@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.Predicate;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -19,9 +17,7 @@ public class CountryProcessorTest {
     public void testGroupCountriesByContinent() throws FileNotFoundException {
         String filename = "src/test/resources/countries.csv";
 
-        Predicate<CountryRecord> noFilteringCondition = null;
-
-        Map<Continent, List<CountryRecord>> countriesByContinent = CountryProcessor.groupFilteredCountriesByContinent(openFile(filename), noFilteringCondition);
+        Map countriesByContinent = CountryProcessor.groupFilteredCountriesByContinent(openFile(filename));
 
         int expectedNumberOfContinents = 6;
 
@@ -32,12 +28,13 @@ public class CountryProcessorTest {
         int expectedNumberOfNorthAmericanCountries = 16;
         int expectedNumberOfAfricanCountries = 48;
 
-        List<CountryRecord> europeanCountries = countriesByContinent.get(Continent.EUROPE);
-        List<CountryRecord> asianCountries = countriesByContinent.get(Continent.ASIA);
-        List<CountryRecord> australianCountries = countriesByContinent.get(Continent.AUSTRALIA);
-        List<CountryRecord> southAmericanCountries = countriesByContinent.get(Continent.SOUTH_AMERICA);
-        List<CountryRecord> northAmericanCountries = countriesByContinent.get(Continent.NORTH_AMERICA);
-        List<CountryRecord> africanCountries = countriesByContinent.get(Continent.AFRICA);
+        // TODO: 
+        List europeanCountries = null;
+        List asianCountries = null;
+        List australianCountries = null;
+        List southAmericanCountries = null;
+        List northAmericanCountries = null;
+        List africanCountries = null;
 
         assertThat(countriesByContinent.size(), is(expectedNumberOfContinents));
 
@@ -53,7 +50,7 @@ public class CountryProcessorTest {
     public void testPopulationByContinent() throws FileNotFoundException {
         String filename = "src/test/resources/countries.csv";
 
-        Map<Continent, Integer> populationByContinent = CountryProcessor.populationByContinent(openFile(filename));
+        Map populationByContinent = CountryProcessor.populationByContinent(openFile(filename));
 
         int expectedNumberOfContinents = 6;
 
@@ -64,12 +61,12 @@ public class CountryProcessorTest {
         int expectedPopulationOfNorthAmericanCountries = 143735472;
         int expectedPopulationOfAfricanCountries = 506334209;
 
-        Integer europeanCountriesPopulation = populationByContinent.get(Continent.EUROPE);
-        Integer asianCountriesPopulation = populationByContinent.get(Continent.ASIA);
-        Integer australianCountriesPopulation = populationByContinent.get(Continent.AUSTRALIA);
-        Integer southAmericanCountriesPopulation = populationByContinent.get(Continent.SOUTH_AMERICA);
-        Integer northAmericanCountriesPopulation = populationByContinent.get(Continent.NORTH_AMERICA);
-        Integer africanCountriesPopulation = populationByContinent.get(Continent.AFRICA);
+        Integer europeanCountriesPopulation = null;
+        Integer asianCountriesPopulation = null;
+        Integer australianCountriesPopulation = null;
+        Integer southAmericanCountriesPopulation = null;
+        Integer northAmericanCountriesPopulation = null;
+        Integer africanCountriesPopulation = null;
 
         assertThat(europeanCountriesPopulation, is(expectedPopulationOfEuropeanCountries));
         assertThat(asianCountriesPopulation, is(expectedPopulationOfAsianCountries));
@@ -82,10 +79,8 @@ public class CountryProcessorTest {
     @Test
     public void testFilteredCountriesByContinent() throws FileNotFoundException {
         String filename = "src/test/resources/countries.csv";
-
-        Predicate<CountryRecord> filterByNamesBeginningWithM = countryRecord -> countryRecord.getName().startsWith("M");
-
-        Map<Continent, List<CountryRecord>> filteredCountriesByContinent = CountryProcessor.groupFilteredCountriesByContinent(openFile(filename), filterByNamesBeginningWithM);
+        
+        Map filteredCountriesByContinent = CountryProcessor.groupFilteredCountriesByContinent(openFile(filename));
 
         int expectedNumberOfContinents = 5;
 
@@ -95,12 +90,12 @@ public class CountryProcessorTest {
         int expectedNumberOfFilteredNorthAmericanCountries = 1;
         int expectedNumberOfFilteredAfricanCountries = 7;
 
-        List<CountryRecord> filteredEuropeanCountries = filteredCountriesByContinent.get(Continent.EUROPE);
-        List<CountryRecord> filteredAsianCountries = filteredCountriesByContinent.get(Continent.ASIA);
-        List<CountryRecord> filteredAustralianCountries = filteredCountriesByContinent.get(Continent.AUSTRALIA);
-        List<CountryRecord> filteredSouthAmericanCountries = filteredCountriesByContinent.get(Continent.SOUTH_AMERICA);
-        List<CountryRecord> filteredNorthAmericanCountries = filteredCountriesByContinent.get(Continent.NORTH_AMERICA);
-        List<CountryRecord> filteredAfricanCountries = filteredCountriesByContinent.get(Continent.AFRICA);
+        List filteredEuropeanCountries = null;
+        List filteredAsianCountries = null;
+        List filteredAustralianCountries = null;
+        List filteredSouthAmericanCountries = null;
+        List filteredNorthAmericanCountries = null;
+        List filteredAfricanCountries = null;
 
         assertThat(filteredCountriesByContinent.size(), is(expectedNumberOfContinents));
 
@@ -115,7 +110,7 @@ public class CountryProcessorTest {
     public void testMostPopulatedCountryByContinent() throws FileNotFoundException {
         String filename = "src/test/resources/countries.csv";
 
-        Map<Continent, Optional<CountryRecord>> mostPopulationCountryByContinent = CountryProcessor.getMostPopulatedCountryByContinent(openFile(filename));
+        Map mostPopulationCountryByContinent = CountryProcessor.getMostPopulatedCountryByContinent(openFile(filename));
 
         int expectedNumberOfContinents = 6;
 
@@ -127,20 +122,20 @@ public class CountryProcessorTest {
         String expectedMostPopulatedAfricanCountry = "Uganda";
 
 
-        CountryRecord actualMostPopulatedEuropeanCountry = mostPopulationCountryByContinent.get(Continent.EUROPE).get();
-        CountryRecord actualMostPopulatedAsianCountry = mostPopulationCountryByContinent.get(Continent.ASIA).get();
-        CountryRecord actualMostPopulatedAustralianCountry = mostPopulationCountryByContinent.get(Continent.AUSTRALIA).get();
-        CountryRecord actualMostPopulatedNorthAmericanCountry = mostPopulationCountryByContinent.get(Continent.NORTH_AMERICA).get();
-        CountryRecord actualMostPopulatedSouthAmericanCountry = mostPopulationCountryByContinent.get(Continent.SOUTH_AMERICA).get();
-        CountryRecord actualMostPopulatedAfricanCountry = mostPopulationCountryByContinent.get(Continent.AFRICA).get();
+        String actualMostPopulatedEuropeanCountry = null;
+        String actualMostPopulatedAsianCountry = null;
+        String actualMostPopulatedAustralianCountry = null;
+        String actualMostPopulatedNorthAmericanCountry = null;
+        String actualMostPopulatedSouthAmericanCountry = null;
+        String actualMostPopulatedAfricanCountry = null;
 
 
-        assertThat(actualMostPopulatedEuropeanCountry.getName(), is(expectedMostPopulatedEuropeanCountry));
-        assertThat(actualMostPopulatedAsianCountry.getName(), is(expectedMostPopulatedAsianCountry));
-        assertThat(actualMostPopulatedAustralianCountry.getName(), is(expectedMostPopulatedAustralianCountry));
-        assertThat(actualMostPopulatedNorthAmericanCountry.getName(), is(expectedMostPopulatedSouthAmericanCountry));
-        assertThat(actualMostPopulatedSouthAmericanCountry.getName(), is(expectedMostPopulatedNorthAmericanCountry));
-        assertThat(actualMostPopulatedAfricanCountry.getName(), is(expectedMostPopulatedAfricanCountry));
+        assertThat(actualMostPopulatedEuropeanCountry, is(expectedMostPopulatedEuropeanCountry));
+        assertThat(actualMostPopulatedAsianCountry, is(expectedMostPopulatedAsianCountry));
+        assertThat(actualMostPopulatedAustralianCountry, is(expectedMostPopulatedAustralianCountry));
+        assertThat(actualMostPopulatedNorthAmericanCountry, is(expectedMostPopulatedSouthAmericanCountry));
+        assertThat(actualMostPopulatedSouthAmericanCountry, is(expectedMostPopulatedNorthAmericanCountry));
+        assertThat(actualMostPopulatedAfricanCountry, is(expectedMostPopulatedAfricanCountry));
     }
 
     private FileReader openFile(String filename) throws FileNotFoundException {
