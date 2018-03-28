@@ -127,20 +127,20 @@ public class CountryProcessorTest {
         String expectedMostPopulatedAfricanCountry = "Uganda";
 
 
-        CountryRecord actualMostPopulatedEuropeanCountry = mostPopulationCountryByContinent.get(Continent.EUROPE).get();
-        CountryRecord actualMostPopulatedAsianCountry = mostPopulationCountryByContinent.get(Continent.ASIA).get();
-        CountryRecord actualMostPopulatedAustralianCountry = mostPopulationCountryByContinent.get(Continent.AUSTRALIA).get();
-        CountryRecord actualMostPopulatedNorthAmericanCountry = mostPopulationCountryByContinent.get(Continent.NORTH_AMERICA).get();
-        CountryRecord actualMostPopulatedSouthAmericanCountry = mostPopulationCountryByContinent.get(Continent.SOUTH_AMERICA).get();
-        CountryRecord actualMostPopulatedAfricanCountry = mostPopulationCountryByContinent.get(Continent.AFRICA).get();
+        String actualMostPopulatedEuropeanCountry = mostPopulationCountryByContinent.get(Continent.EUROPE).get().getName();
+        String actualMostPopulatedAsianCountry = mostPopulationCountryByContinent.get(Continent.ASIA).get().getName();
+        String actualMostPopulatedAustralianCountry = mostPopulationCountryByContinent.get(Continent.AUSTRALIA).get().getName();
+        String actualMostPopulatedNorthAmericanCountry = mostPopulationCountryByContinent.get(Continent.NORTH_AMERICA).get().getName();
+        String actualMostPopulatedSouthAmericanCountry = mostPopulationCountryByContinent.get(Continent.SOUTH_AMERICA).get().getName();
+        String actualMostPopulatedAfricanCountry = mostPopulationCountryByContinent.get(Continent.AFRICA).get().getName();
 
 
-        assertThat(actualMostPopulatedEuropeanCountry.getName(), is(expectedMostPopulatedEuropeanCountry));
-        assertThat(actualMostPopulatedAsianCountry.getName(), is(expectedMostPopulatedAsianCountry));
-        assertThat(actualMostPopulatedAustralianCountry.getName(), is(expectedMostPopulatedAustralianCountry));
-        assertThat(actualMostPopulatedNorthAmericanCountry.getName(), is(expectedMostPopulatedSouthAmericanCountry));
-        assertThat(actualMostPopulatedSouthAmericanCountry.getName(), is(expectedMostPopulatedNorthAmericanCountry));
-        assertThat(actualMostPopulatedAfricanCountry.getName(), is(expectedMostPopulatedAfricanCountry));
+        assertThat(actualMostPopulatedEuropeanCountry, is(expectedMostPopulatedEuropeanCountry));
+        assertThat(actualMostPopulatedAsianCountry, is(expectedMostPopulatedAsianCountry));
+        assertThat(actualMostPopulatedAustralianCountry, is(expectedMostPopulatedAustralianCountry));
+        assertThat(actualMostPopulatedNorthAmericanCountry, is(expectedMostPopulatedSouthAmericanCountry));
+        assertThat(actualMostPopulatedSouthAmericanCountry, is(expectedMostPopulatedNorthAmericanCountry));
+        assertThat(actualMostPopulatedAfricanCountry, is(expectedMostPopulatedAfricanCountry));
     }
 
     private FileReader openFile(String filename) throws FileNotFoundException {
